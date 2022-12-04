@@ -38,7 +38,11 @@ const performCalculations = () => {
         workers.push(createWorker(startPos + i));
     });
 
-    Promise.all(workers).then((res) => console.log(res));
+    Promise.allSettled(workers).then((results) => 
+        results.forEach(res=>{
+            console.log(res.value || res.reason);
+        })
+    );
 }
 
 performCalculations();
